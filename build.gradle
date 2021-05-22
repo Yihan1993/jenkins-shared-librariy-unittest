@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://repo-manager.cloud.zf-world.com/artifactory/plugins-gradle-remote'
+        }
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+repositories {
+    maven {
+        url 'https://repo-manager.cloud.zf-world.com/artifactory/libs_release-maven-virtual/'
+    }
+}
+
+group 'somecompany'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:2.5.14'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = []
+        }
+        groovy {
+            srcDirs = ['src', 'vars']
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+}
